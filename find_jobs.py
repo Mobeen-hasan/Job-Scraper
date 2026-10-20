@@ -3,6 +3,7 @@
 import csv
 import json
 import os
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -46,7 +47,9 @@ def main():
         sys.exit("Set ADZUNA_APP_ID and ADZUNA_APP_KEY (in .env or environment).")
 
     cfg = json.loads((ROOT / "config.json").read_text())
-    exclude = [w.lower() for w in cfg.get("exclude_words", [])]
+    # whole-word match on the job title only, so "lead" doesn't hit "leadership"
+    words = [re.escape(w) for w in cfg.get("exclude_words", [])]
+    exclude_re = re.compile(r"(?<!\w)(?:%s)(?!\w)" % "|".join(words), re.I) if words else None
 
     seen_file = ROOT / "seen.json"
     seen = set(json.loads(seen_file.read_text())) if seen_file.exists() else set()
@@ -57,8 +60,7 @@ def main():
             jid = str(job["id"])
             if jid in seen or jid in new_jobs:
                 continue
-            text = f"{job.get('title', '')} {job.get('description', '')}".lower()
-            if any(w in text for w in exclude):
+            if exclude_re and exclude_re.search(job.get("title", "")):
                 continue
             new_jobs[jid] = job
 

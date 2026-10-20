@@ -1,9 +1,23 @@
 {
   "country": "us",
-  "titles": ["software engineer", "backend developer"],
+  "titles": [
+    "entry level software engineer",
+    "new grad software engineer",
+    "junior software engineer",
+    "junior developer",
+    "associate software engineer",
+    "entry level engineer",
+    "junior engineer",
+    "entry level data analyst",
+    "data entry",
+    "data entry clerk"
+  ],
   "location": "",
   "distance_km": 50,
-  "max_days_old": 1,
+  "max_days_old": 2,
   "results_per_page": 50,
-  "exclude_words": ["senior", "staff", "principal", "director", "clearance"]
+  "exclude_words": [
+    "senior", "sr", "staff", "principal", "lead", "director", "manager",
+    "architect", "head", "vp", "clearance", "intern", "internship", "co-op"
+  ]
 }
