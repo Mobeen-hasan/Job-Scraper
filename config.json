@@ -1,0 +1,9 @@
+{
+  "country": "us",
+  "titles": ["software engineer", "backend developer"],
+  "location": "",
+  "distance_km": 50,
+  "max_days_old": 1,
+  "results_per_page": 50,
+  "exclude_words": ["senior", "staff", "principal", "director", "clearance"]
+}
